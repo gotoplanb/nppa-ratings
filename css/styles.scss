@@ -10,7 +10,7 @@ body {
 	margin: 0 auto;
 	max-width: 650px;
 }
-input {
+input[type="text"] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	border: 1px solid #ddd;
