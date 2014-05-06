@@ -29,14 +29,15 @@
     },
 
     introView: function() {  
-      var main = new NPPA.Views.Main();
+      if(!this.main) {
+        this.main = new NPPA.Views.Main();
+      }
     },
 
     photoView: function(photoNumber) {
       var photoName = nppaImages[(photoNumber - 1)];
-      console.log(photoName);
-      var photo = new NPPA.Views.Photo({ photoName: photoName, photoIndex: photoNumber });
 
+      var photo = new NPPA.Views.Photo({ model: NPPA.currentUser, photoName: photoName, photoIndex: photoNumber });
       photo.render();
     }
   
@@ -64,6 +65,7 @@
     localStorage: new Backbone.LocalStorage('Users'),
 
     initialize: function() {
+      this.listenTo(this, 'add', this.setCurrentUser);
       this.fetch();
     },
 
@@ -71,6 +73,14 @@
       var totalUsers = this.length;
 
       return (totalUsers + 1);
+    },
+
+    setCurrentUser: function() {
+      var currentUserIndex = this.length - 1;
+      NPPA.currentUser = this.at(currentUserIndex);
+
+      // Log currentUser in the console for testing
+      console.log(NPPA.currentUser.get('firstName'));
     }
 
   });
@@ -108,13 +118,33 @@
 
     activateButton: function() {
       if ($('input[name="quality"]:checked').val() && $('input[name="shareability"]:checked').val()) {
-        $('#next-photo').toggleClass('-inactive -active');
+        $('#next-photo').removeClass('-inactive').addClass('-active');
       }
     },
 
     saveAndContinue: function() {
+      var qRating = $('input[name="quality"]:checked').val();
+      var sRating = $('input[name="shareability"]:checked').val();
       var nextPhoto = parseInt(this.photoDetails.number)+ 1;
+      var qRatingList = NPPA.currentUser.get('qualityRatings');
+      var sRatingList = NPPA.currentUser.get('shareRatings');
+
+      // Push quality rating
+      qRatingList.push(qRating);
+
+      // Push shareability rating
+      sRatingList.push(sRating);
+
+      // Save
+      this.model.save();
+
+      // Log in console for testing
+      console.log('Quality:', qRatingList);
+      console.log('Shareability:', sRatingList);
+
       this.clearView();
+
+      // Navigate to next photo
       NPPA.mainRouter.navigate('photos/' + nextPhoto, {trigger: true});
     } 
 
@@ -141,6 +171,13 @@
       this.$el.html(this.template);
     },
 
+    clearView: function() {
+      this.undelegateEvents();
+      this.$el.empty();
+      this.stopListening();
+      return this;
+    },
+
     activateButton: function() {
       console.log('Change detected');
       if ($('#first-name').val() && $('#last-name').val()) {
@@ -163,9 +200,12 @@
       NPPA.userList.create({
         firstName: userFirst,
         lastName: userLast,
-        id: NPPA.userList.setUserId()
-      });
+        id: NPPA.userList.setUserId(),
+        qualityRatings: [],
+        shareRatings: []  
+      }, {wait: true});
 
+      this.clearView();
       NPPA.mainRouter.navigate('photos/1', {trigger: true});
     }
 
