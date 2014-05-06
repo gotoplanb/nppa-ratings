@@ -33,14 +33,12 @@ p {
 	line-height: 1.5em;
 }
 .photo {
-	margin: 30px auto;
+	margin: 0 auto 30px auto;
 	background-color: #fff;
-	border-radius: 4px;
-	border: 1px solid #ddd;
+	box-shadow: 0 0 30px rgba(100,100,100, 0.08);
 	position: relative;
 	z-index: 1;
 	img {
-		border-radius: 4px 4px 0 0;
 		width: 100%;
 	}
 	form {
@@ -100,6 +98,29 @@ p {
 	}
 	.button {
 		margin-right: 10px;
+	}
+}
+.progress {
+	margin-top: 30px;
+	text-align: center;
+	p {
+		font-size: 14px;
+		margin-bottom: 5px;
+	}
+}
+.progress__bar {
+	background-color: #ddd;
+	height: 5px;
+	margin-bottom: -1px;
+	position: relative;
+	span {
+		background-color: #2396EA;
+		display: block;
+		height: 5px;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
 	}
 }
 .button {
