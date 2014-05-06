@@ -1,5 +1,5 @@
 body {
-	background-color: #f0f0f0;
+	background-color: #222;
 	color: #333;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
@@ -35,7 +35,7 @@ p {
 .photo {
 	margin: 0 auto 30px auto;
 	background-color: #fff;
-	box-shadow: 0 0 30px rgba(100,100,100, 0.08);
+	box-shadow: 0 0 30px rgba(0,0,0, 0.20);
 	position: relative;
 	z-index: 1;
 	img {
@@ -59,6 +59,26 @@ p {
 			font-size: 14px;
 		}
 	}
+}
+.bg-img {
+	position: fixed;
+	min-height: 120vh;
+	min-width: 120vw;
+	top: -30px;
+	left: -30px;
+	img {
+		-webkit-filter: blur(20px) brightness(0.90);
+		-moz-filter: blur(20px) brightness(0.90);
+		-o-filter: blur(20px) brightness(0.90);
+		-ms-filter: blur(20px) brightness(0.90);
+		filter: blur(20px) brightness(0.90);
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+	
 }
 .message {
 	h1 {
@@ -93,19 +113,24 @@ p {
 			padding-bottom: 20px;
 		}
 		&.-active {
-		display: block;
-	}
+			display: block;
+		}
 	}
 	.button {
 		margin-right: 10px;
 	}
 }
 .progress {
-	margin-top: 30px;
-	text-align: center;
+	margin-top: 20px;
+	text-align: right;
+	position: relative;
+	z-index: 2;
 	p {
-		font-size: 14px;
-		margin-bottom: 5px;
+		background: #ddd;
+		display: inline-block;
+		font-size: 12px;
+		margin:  0;
+		padding: 5px 10px;
 	}
 }
 .progress__bar {
