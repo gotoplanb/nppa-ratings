@@ -8,7 +8,18 @@ body {
 }
 .container {
 	margin: 0 auto;
-	max-width: 650px;
+	max-width: 550px;
+}
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+}
+h2 {
+	font-size: 21px;
+	font-weight: 300;
 }
 input[type="text"] {
 	-webkit-appearance: none;
@@ -25,12 +36,24 @@ p {
 	margin: 30px auto;
 	background-color: #fff;
 	border-radius: 4px;
+	border: 1px solid #ddd;
+	position: relative;
+	z-index: 1;
 	img {
 		border-radius: 4px 4px 0 0;
 		width: 100%;
 	}
 	form {
 		padding: 20px;
+	}
+}
+.photo__rating {
+	padding-bottom: 35px;
+	h2 {
+		margin-top: 0;
+	}
+	label {
+		margin-right: 20px;
 	}
 }
 .welcome {
@@ -46,6 +69,7 @@ p {
 	background-color: #51A56F;
 	border-radius: 4px;
 	color: #fff;
+	cursor: pointer;
 	display: inline-block;
 	padding: 0.85em 1.5em;
 	text-decoration: none;
@@ -54,5 +78,15 @@ p {
 	}
 	&:hover {
 		background-color: lighten(#51A56F, 5);
+	}
+	&.-right {
+		float: right;
+	}
+	&.-inactive {
+		opacity: 0.4;
+	}
+	&.-small {
+		font-size: 0.85em;
+		padding: 0.75em 1.25em;
 	}
 }

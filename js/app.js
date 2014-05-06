@@ -24,14 +24,14 @@
       'photos/:photoNumber': 'photoView' // Individual Photo view
     },
 
-    introView: function() {
-      $('#app').html('Welcome!');
+    introView: function() {  
+      var main = new NPPA.Views.Main();
     },
 
     photoView: function(photoNumber) {
-      var currentPhoto = nppaImages[(photoNumber - 1)];
+      var photoName = nppaImages[(photoNumber - 1)];
 
-      var Photo = new NPPA.Views.Photo({ photoUrl: currentPhoto });
+      var photo = new NPPA.Views.Photo({ photoName: photoName, photoIndex: photoNumber });
     }
   
   });
@@ -65,13 +65,52 @@
 
     template: _.template($('#photo-template').html()),
 
+    events: {
+      'change input[type="radio"]': 'activateButton',
+      'click #next-photo.-active': 'saveAndContinue'
+    },
+
     initialize: function(options) {
-      this.photoUrl = options.photoUrl;
+      this.photoDetails = {
+        fileName: options.photoName,
+        number: options.photoIndex
+      }
+
       this.render();
     },
 
     render: function() {
-      this.$el.html(this.template({ photo: this.photoUrl }));
+      this.$el.html(this.template(this.photoDetails));
+    },
+
+    activateButton: function() {
+      if ($('input[name="quality"]:checked').val() && $('input[name="shareability"]:checked').val()) {
+        $('#next-photo').toggleClass('-inactive -active');
+      }
+    },
+
+    saveAndContinue: function() {
+      console.log('Soon');
+      var nextPhoto = parseInt(this.photoDetails.number)+ 1;
+      NPPA.mainRouter.navigate('photos/' + nextPhoto, {trigger: true});
+    } 
+
+  });
+
+
+  // Main view
+  NPPA.Views.Main = Backbone.View.extend({
+
+    el: '#app',
+
+    template: _.template($('#welcome-template').html()),
+
+    initialize: function() {
+      this.render();
+    },
+
+    render: function() {
+      this.$el.html(this.template);
     }
 
   });
