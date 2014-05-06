@@ -63,16 +63,16 @@ p {
 .bg-img {
 	background: #222;
 	position: fixed;
-	min-height: 120vh;
-	min-width: 120vw;
+	min-height: 120%;
+	min-width: 120%;
 	top: -30px;
 	left: -30px;
 	img {
-		-webkit-filter: blur(20px) brightness(0.90);
-		-moz-filter: blur(20px) brightness(0.90);
-		-o-filter: blur(20px) brightness(0.90);
-		-ms-filter: blur(20px) brightness(0.90);
-		filter: blur(20px) brightness(0.90);
+		-webkit-filter: blur(30px) brightness(0.90);
+		-moz-filter: blur(30px) brightness(0.90);
+		-o-filter: blur(30px) brightness(0.90);
+		-ms-filter: blur(30px) brightness(0.90);
+		filter: blur(30px) brightness(0.90);
 		height: 100%;
 		position: absolute;
 		top: 0;
