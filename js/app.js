@@ -21,7 +21,8 @@
 
     routes: {
       '': 'introView', // Landing page
-      'photos/:photoNumber': 'photoView' // Individual Photo view
+      'photos/:photoNumber': 'photoView', // Individual Photo view
+      'results': 'resultsView'
     },
 
     initialize: function() {
@@ -39,6 +40,12 @@
 
       var photo = new NPPA.Views.Photo({ model: NPPA.currentUser, photoName: photoName, photoIndex: photoNumber });
       photo.render();
+    },
+
+    resultsView: function() {
+      var results = new NPPA.Views.Results({ model: NPPA.currentUser });
+
+      results.render();
     }
   
   });
@@ -107,6 +114,8 @@
 
     render: function() {
       this.$el.html(this.template(this.photoDetails));
+
+      return this;
     },
 
     clearView: function() {
@@ -125,7 +134,8 @@
     saveAndContinue: function() {
       var qRating = $('input[name="quality"]:checked').val();
       var sRating = $('input[name="shareability"]:checked').val();
-      var nextPhoto = parseInt(this.photoDetails.number)+ 1;
+      var thisPhoto = parseInt(this.photoDetails.number);
+      var nextPhoto = thisPhoto + 1;
       var qRatingList = NPPA.currentUser.get('qualityRatings');
       var sRatingList = NPPA.currentUser.get('shareRatings');
 
@@ -145,8 +155,42 @@
       this.clearView();
 
       // Navigate to next photo
-      NPPA.mainRouter.navigate('photos/' + nextPhoto, {trigger: true});
+      if (thisPhoto >= (nppaImages.length)) {
+        NPPA.mainRouter.navigate('results', {trigger: true});
+      } else {
+        NPPA.mainRouter.navigate('photos/' + nextPhoto, {trigger: true});
+      }
     } 
+
+  });
+
+
+  // Results view
+  NPPA.Views.Results = Backbone.View.extend({
+
+    el: '#app',
+
+    template: _.template($('#results-template').html()),
+
+    events: {
+      'click #view-results': 'showResults',
+      'click #next-user': 'backToStart'
+    },
+
+    render: function() {
+      this.$el.html(this.template(this.model.attributes));
+
+      return this;
+    },
+
+    showResults: function(e) {
+      e.preventDefault();
+      this.$('.user-ratings').addClass('-active');
+    },
+
+    backToStart: function() {
+      NPPA.mainRouter.navigate('', {trigger: true});
+    }
 
   });
 
@@ -179,7 +223,6 @@
     },
 
     activateButton: function() {
-      console.log('Change detected');
       if ($('#first-name').val() && $('#last-name').val()) {
         $('#get-started').removeClass('-inactive').addClass('-active');
       } else {

@@ -8,7 +8,7 @@ body {
 }
 .container {
 	margin: 0 auto;
-	max-width: 550px;
+	max-width: 800px;
 }
 .group:after {
 	visibility: hidden;
@@ -21,7 +21,7 @@ h2 {
 	font-size: 21px;
 	font-weight: 300;
 }
-input[type="text"] {
+input[type="text"], textarea {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	border: 1px solid #ddd;
@@ -48,21 +48,58 @@ p {
 	}
 }
 .photo__rating {
+	box-sizing: border-box;
+	float: left;
+	width: 50%;
 	padding-bottom: 35px;
 	h2 {
 		margin-top: 0;
 	}
 	label {
-		margin-right: 20px;
+		margin-right: 10px;
+		b {
+			font-size: 14px;
+		}
 	}
 }
-.welcome {
+.message {
 	h1 {
 		font-size: 60px;
 		font-weight: 300;
 	}
 	form {
 		margin: 40px 0 20px 0;
+	}
+}
+.admin-tools {
+	margin-top: 40px;
+	.user-ratings {
+		border: 1px solid #ddd;
+		box-sizing: border-box;
+		display: none;
+		margin-top: 30px;
+		padding: 20px;
+		h2 {
+			box-sizing: border-box;
+			float: left;
+			margin-top: 5px;
+			padding-right: 10px;
+			text-align: right;
+			width: 27%;
+		}
+		textarea {
+			box-sizing: border-box;
+			width: 73%;
+		}
+		div:first-child {
+			padding-bottom: 20px;
+		}
+		&.-active {
+		display: block;
+	}
+	}
+	.button {
+		margin-right: 10px;
 	}
 }
 .button {
@@ -82,8 +119,20 @@ p {
 	&.-right {
 		float: right;
 	}
+	&.-left {
+		float: left;
+	}
 	&.-inactive {
 		opacity: 0.4;
+		&:hover {
+			background-color: #51A56F;
+		}
+	}
+	&.-secondary {
+		background-color: #bbb;
+		&:hover {
+			background-color: #ccc;
+		}
 	}
 	&.-small {
 		font-size: 0.85em;
