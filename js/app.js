@@ -106,9 +106,12 @@
     },
 
     initialize: function(options) {
+      var progress = (options.photoIndex / nppaImages.length) * 100;
+      
       this.photoDetails = {
         fileName: options.photoName,
-        number: options.photoIndex
+        number: options.photoIndex,
+        percentDone: progress
       }
     },
 
@@ -188,7 +191,8 @@
       this.$('.user-ratings').addClass('-active');
     },
 
-    backToStart: function() {
+    backToStart: function(e) {
+      e.preventDefault();
       NPPA.mainRouter.navigate('', {trigger: true});
     }
 
