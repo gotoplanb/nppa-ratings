@@ -14,14 +14,14 @@
     <div id="app" class="container"></div>
 
     <script type="text/template" id="welcome-template">
-      <div class="welcome container">
+      <div class="message container">
         <h1>Welcome</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam metus, scelerisque id ligula eget, venenatis porta felis. Nunc malesuada ut sapien et tincidunt. Vivamus nisl arcu, tempor sit amet porttitor sit amet, ultrices a lectus. Mauris vitae nibh facilisis, fringilla ante eu, viverra ipsum. Nullam vel elit rhoncus, porta lacus et.</p>
         <form>
           <input id="first-name" type="text" placeholder="First Name">
           <input id="last-name" type="text" placeholder="Last Name">
         </form>
-        <a a href="#" id="get-started" class="button -inactive">Let's get started <i class="fa fa-angle-right"></i></a>
+        <a href="#" id="get-started" class="button -inactive">Let's get started <i class="fa fa-angle-right"></i></a>
       </div>
     </script>
 
@@ -77,6 +77,31 @@
           </div>
           <a id="next-photo" class="button -right -inactive -small">Next photo <i class="fa fa-arrow-right"></i></a>
         </form>
+      </div>
+    </script>
+
+    <script type="text/template" id="results-template">
+      <div class="message container">
+        <h1>Thanks, <%= firstName %>!</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam metus, scelerisque id ligula eget, venenatis porta felis. Nunc malesuada ut sapien et tincidunt. Vivamus nisl arcu, tempor sit amet porttitor sit amet, ultrices a lectus. Mauris vitae nibh facilisis, fringilla ante eu, viverra ipsum. Nullam vel elit rhoncus, porta lacus et.</p>
+        <div class="admin-tools">
+          <p>For admin use:</p>
+          <div class="row">
+            <a href="#" id="view-results" class="button">View results<i class="fa fa-angle-right"></i></a>
+            <a href="#" id="next-user" class="button -secondary">Next user <i class="fa fa-angle-right"></i></a>
+          </div>
+          <div class="user-ratings">
+            <div>
+              <h2>Quality ratings:</h2>
+              <textarea><%= qualityRatings %></textarea>
+            </div>
+            <div>
+              <h2>Shareability ratings:</h2>
+              <textarea><%= shareRatings %></textarea>
+            </div>
+          </div>
+        </div>
+
       </div>
     </script>
   
