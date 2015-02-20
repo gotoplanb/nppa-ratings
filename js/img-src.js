@@ -25,7 +25,7 @@ nppaImages = [
 	'024_ugc_news5.jpg',
 	'026_ugc_feature6.jpg',
 	'027_pro_feature4.jpg',
-	'028_ugc_news.jpg',
+	'028_pro_sports5',
 	'029_ugc_news5.jpg',
 	'030_pro_sports6.jpg',
 	'031_ugc_news6.jpg',
